@@ -45,7 +45,7 @@
 @section('content')
     <x-page-header title="Proyek">
         <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-           data-bs-target="#modal-report">
+           data-bs-target="#modal-create">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -57,7 +57,7 @@
             Tambah Proyek
         </a>
         <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-           data-bs-target="#modal-report" aria-label="Create new report">
+           data-bs-target="#modal-create" aria-label="Create new report">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -89,75 +89,146 @@
                                     <th>Tgl Mulai</th>
                                     <th>Tgl Selesai</th>
                                     <th>Document</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Projek Membangun IKN</td>
-                                    <td>20 Febuary 2024</td>
-                                    <td>21 Desember 2024</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary " style="margin-bottom: 4px">Download SPK Owner</a><br/>
-                                        <a class="btn btn-sm btn-primary " style="margin-bottom: 4px">Download Invoice Tagihan</a><br/>
-                                        <a class="btn btn-sm btn-primary " style="margin-bottom: 4px">Download Document Progress</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Projek Pembangunan Jembatan</td>
-                                    <td>1 Maret 2024</td>
-                                    <td>31 Oktober 2024</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download SPK Owner</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Invoice Tagihan</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Document Progress</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Projek Renovasi Gedung</td>
-                                    <td>15 Maret 2024</td>
-                                    <td>30 September 2024</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download SPK Owner</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Invoice Tagihan</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Document Progress</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Projek Perluasan Bandara</td>
-                                    <td>10 April 2024</td>
-                                    <td>15 November 2024</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download SPK Owner</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Invoice Tagihan</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Document Progress</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Projek Pengembangan Jalan Tol</td>
-                                    <td>25 Mei 2024</td>
-                                    <td>31 Desember 2024</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download SPK Owner</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Invoice Tagihan</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Document Progress</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Projek Restorasi Kawasan Wisata</td>
-                                    <td>15 Juni 2024</td>
-                                    <td>15 Desember 2024</td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download SPK Owner</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Invoice Tagihan</a><br/>
-                                        <a class="btn btn-sm btn-primary" style="margin-bottom: 4px">Download Document Progress</a>
-                                    </td>
-                                </tr>
+                                @foreach($projects as $project)
+                                    <tr>
+                                        <td>{{ $project->id }}</td>
+                                        <td>{{ $project->nama }}</td>
+                                        <td>{{ $project->tanggal_mulai }}</td>
+                                        <td>{{ $project->tanggal_selesai }}</td>
+                                        <td>
+
+                                            <div class="text-center">
+                                                <a href="{{ asset('storage/' . $project->document_spk_owner) }}"
+                                                   data-fancybox="gallery" class="btn btn-primary btn-sm m-1">Download
+                                                    SPK Owner</a> <br/>
+                                                <a href="{{ asset('storage/' . $project->document_invoice_tagihan) }}"
+                                                   data-fancybox="gallery" class="btn btn-primary btn-sm m-1">Download
+                                                    Invoice Tagihan</a><br/>
+                                                <a href="{{ asset('storage/' . $project->document_laporan_progress) }}"
+                                                   data-fancybox="gallery" class="btn btn-primary btn-sm m-1">Download
+                                                    Laporan Progress</a>
+                                            </div>
+
+                                        </td>
+
+                                        <td>
+                                            <button
+                                                class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#modal-edit-{{$project->id}}">Edit
+                                            </button>
+                                            <form action="{{ route('project.destroy', $project->id) }}" method="post"
+                                                  style="display: inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger ">Delete</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <div class="modal modal-blur fade" id="modal-edit-{{$project->id}}" tabindex="-1"
+                                         role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form action="{{ route('project.update', $project->id) }}" method="post"
+                                                      enctype="multipart/form-data">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Edit Project</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Nama</label>
+                                                                    <input type="text" class="form-control" name="nama"
+                                                                           value="{{ $project->nama }}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Deskripsi</label>
+                                                                    <textarea class="form-control" name="deskripsi"
+                                                                              required>{{ $project->deskripsi }}</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Tanggal Mulai</label>
+                                                                    <input type="date" class="form-control"
+                                                                           name="tanggal_mulai"
+                                                                           value="{{ $project->tanggal_mulai }}"
+                                                                           required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Tanggal Selesai</label>
+                                                                    <input type="date" class="form-control"
+                                                                           name="tanggal_selesai"
+                                                                           value="{{ $project->tanggal_selesai }}"
+                                                                           required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Document SPK Owner</label>
+                                                                    <input type="file" class="form-control"
+                                                                           name="document_spk_owner">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Document Invoice
+                                                                        Tagihan</label>
+                                                                    <input type="file" class="form-control"
+                                                                           name="document_invoice_tagihan">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Document Laporan
+                                                                        Progress</label>
+                                                                    <input type="file" class="form-control"
+                                                                           name="document_laporan_progress">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="#" class="btn btn-link link-secondary"
+                                                           data-bs-dismiss="modal">
+                                                            Cancel
+                                                        </a>
+                                                        <button type="submit" class="btn btn-primary ms-auto">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                 width="24" height="24"
+                                                                 viewBox="0 0 24 24"
+                                                                 stroke-width="2" stroke="currentColor" fill="none"
+                                                                 stroke-linecap="round"
+                                                                 stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                <path d="M12 5l0 14"/>
+                                                                <path d="M5 12l14 0"/>
+                                                            </svg>
+                                                            Edit
+                                                        </button>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -166,6 +237,87 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal modal-blur fade" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form action="{{ route('project.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Project</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Nama</label>
+                                    <input type="text" class="form-control" name="nama" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Deskripsi</label>
+                                    <textarea class="form-control" name="deskripsi" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Tanggal Mulai</label>
+                                    <input type="date" class="form-control" name="tanggal_mulai" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Tanggal Selesai</label>
+                                    <input type="date" class="form-control" name="tanggal_selesai" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Document SPK Owner</label>
+                                    <input type="file" class="form-control" name="document_spk_owner">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Document Invoice Tagihan</label>
+                                    <input type="file" class="form-control" name="document_invoice_tagihan">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Document Laporan Progress</label>
+                                    <input type="file" class="form-control" name="document_laporan_progress">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 5l0 14"/>
+                                <path d="M5 12l14 0"/>
+                            </svg>
+                            Create
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 
 @endsection
 
