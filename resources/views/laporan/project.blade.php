@@ -3,8 +3,8 @@
 @push("styles")
     <link href="https://cdn.datatables.net/2.1.6/css/dataTables.dataTables.css" rel="stylesheet">
     <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
     />
 
     <style>
@@ -43,7 +43,7 @@
 @endpush
 
 @section('content')
-    <x-page-header title="Export Permintaan Barang">
+    <x-page-header title="Export Permintaan Project">
 
     </x-page-header>
 
@@ -115,8 +115,8 @@
             let start = $('#datepicker-start').val();
             let end = $('#datepicker-end').val();
 
-            location.href = "{{route("laporan.pembelian-barang.export")}}?start_at=" + start + "&end_at=" + end;
-            href = "{{route("laporan.pembelian-barang.export")}}"
+            location.href = "{{route("laporan.project.export")}}?start_at=" + start + "&end_at=" + end;
+            href = "{{route("laporan.project.export")}}"
         }
     </script>
 

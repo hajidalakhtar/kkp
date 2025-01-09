@@ -12,10 +12,11 @@ return new class extends Migration {
     {
         Schema::create('permintaan_barang', function (Blueprint $table) {
             $table->id();
-            $table->string("nama_peminta");
+            $table->string("nama_karyawan");
             $table->foreignId('id_barang')->constrained('produks');
             $table->integer('jumlah');
             $table->string('status')->default('pending');
+            $table->text('deskripsi');
             $table->timestamps();
         });
     }

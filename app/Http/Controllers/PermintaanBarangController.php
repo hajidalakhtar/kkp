@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PermintaanBarangController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('web');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -43,15 +48,18 @@ class PermintaanBarangController extends Controller
             'nama_peminta' => 'required|string|max:255',
             'id_barang' => 'required|exists:produks,id',
             'jumlah' => 'required|integer|min:1',
+            'deskripsi' => 'required',
+
         ]);
+
 
         \App\Models\PermintaanBarang::create([
-            'nama_peminta' => $request->input('nama_peminta'),
+            'nama_karyawan' => $request->input('nama_peminta'),
             'id_barang' => $request->input('id_barang'),
             'jumlah' => $request->input('jumlah'),
+            'deskripsi' => $request->input('deskripsi'),
             'status' => 'pending',
         ]);
-
         return redirect()->back()->with('success', 'Permintaan barang berhasil diajukan');
     }
     /**

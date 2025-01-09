@@ -80,6 +80,18 @@
 
 
         </div>
+        @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session()->get('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card card-md">
             <div class="card-body">
                 <div class="w-100 text-center mb-5">
@@ -121,21 +133,21 @@
 
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Alamat </label>
+                        <textarea class="form-control" name="deskripsi"></textarea>
 
-                    <div class="mb-2">
-                        <label class="form-check">
-                            <input type="checkbox" class="form-check-input"/>
-                            <span class="form-check-label">Remember me on this device</span>
-                        </label>
                     </div>
+
+
                     <div class="form-footer">
-                        <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                        <button type="submit" class="btn btn-primary w-100">Buat</button>
+                        <hr/>
+                        <a href="{{route("permintaan-barang.index")}}" class="btn btn-warning w-100 mt-3">Kembali</a>
+
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="text-center text-secondary mt-3">
-            Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
         </div>
     </div>
 </div>
