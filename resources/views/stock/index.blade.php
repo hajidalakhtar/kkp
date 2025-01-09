@@ -45,7 +45,7 @@
 @section('content')
     <x-page-header title="Stock">
         <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-           data-bs-target="#modal-report">
+           data-bs-target="#modal-create">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -57,7 +57,7 @@
             Tambah Stock
         </a>
         <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-           data-bs-target="#modal-report" aria-label="Create new report">
+           data-bs-target="#modal-create" aria-label="Create new report">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -106,18 +106,146 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nama Barang</th>
-                                    <th>Quantity</th>
+                                    <th>Stock</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($product as $item)
+                                    <tr>
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->stock}}</td>
+                                        <td>{{$item->status}}</td>
+                                        <td>
+                                            <a
+                                                class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#modal-edit-{{$item->id}}">Edit</a>
+                                            <form action="{{route('stock.destroy', $item->id)}}" method="post"
+                                                  style="display: inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+
+
+                                    <div class="modal modal-blur fade" id="modal-edit-{{$item->id}}" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form action="{{ route('stock.update', $item->id) }}" method="post"
+                                                      id="formData">
+                                                    @csrf
+                                                    @method('PUT')
+
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Create Barang</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Nama</label>
+                                                                    <input type="text" class="form-control" name="name"
+                                                                           value="{{$item->name}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Stock</label>
+                                                                    <input type="number" class="form-control"
+                                                                           name="stock" value="{{$item->stock}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="#" class="btn btn-link link-secondary"
+                                                           data-bs-dismiss="modal">
+                                                            Cancel
+                                                        </a>
+                                                        <button type="submit" class="btn btn-primary ms-auto"
+                                                                data-bs-dismiss="modal">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                 width="24" height="24"
+                                                                 viewBox="0 0 24 24"
+                                                                 stroke-width="2" stroke="currentColor" fill="none"
+                                                                 stroke-linecap="round"
+                                                                 stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                <path d="M12 5l0 14"/>
+                                                                <path d="M5 12l14 0"/>
+                                                            </svg>
+                                                            Create
+                                                        </button>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @endforeach
 
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="modal-create" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form action="{{ route('stock.store') }}" method="post" id="formData">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Barang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Nama</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Stock</label>
+                                    <input type="number" class="form-control" name="stock">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 5l0 14"/>
+                                <path d="M5 12l14 0"/>
+                            </svg>
+                            Create
+                        </button>
+
+                    </div>
+                </form>
             </div>
         </div>
     </div>

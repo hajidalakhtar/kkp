@@ -44,8 +44,7 @@
 
 @section('content')
     <x-page-header title="Permintaan Barang">
-        <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-           data-bs-target="#modal-report">
+        <a href="/request-barang" class="btn btn-primary d-none d-sm-inline-block" >
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -114,7 +113,45 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($permintaanBarnag as $item)
+                                    <tr>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->nama_peminta }}</td>
+                                        <td>{{ $item->product->name }}</td>
+                                        <td>{{ $item->jumlah }}</td>
+                                        <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td>
+                                            {{--                                            <a href="{{ route('permintaan-barang.edit', $item->id) }}"--}}
+                                            {{--                                               class="btn btn-sm btn-primary">Edit</a>--}}
+                                            {{--                                            --}}
+                                            {{--                                            <form action="{{ route('permintaan-barang.destroy', $item->id) }}"--}}
+                                            {{--                                                  method="POST" style="display:inline-block;">--}}
+                                            {{--                                                @csrf--}}
+                                            {{--                                                @method('DELETE')--}}
+                                            {{--                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>--}}
+                                            {{--                                            </form>--}}
 
+
+
+                                            @if($item->status != "pending")
+
+                                            @else
+                                                <form action="{{ route('permintaan-barang.approve', $item->id) }}"
+                                                      method="POST" style="display:inline-block;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-success">Approve
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('permintaan-barang.reject', $item->id) }}"
+                                                      method="POST" style="display:inline-block;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-warning">Reject</button>
+                                                </form>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

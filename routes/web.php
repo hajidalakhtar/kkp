@@ -13,7 +13,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('karyawan', App\Http\Controllers\KaryawanController::class);
 Route::resource('project', App\Http\Controllers\ProjectController::class);
+
+Route::get("request-barang", [App\Http\Controllers\PermintaanBarangController::class, "requestBarang"])->name("request-barang");
 Route::resource('permintaan-barang', App\Http\Controllers\PermintaanBarangController::class);
+Route::post("approve/{id}", [App\Http\Controllers\PermintaanBarangController::class, "approve"])->name("permintaan-barang.approve");
+Route::post("reject/{id}", [App\Http\Controllers\PermintaanBarangController::class, "reject"])->name("permintaan-barang.reject");
+
 Route::resource("stock", App\Http\Controllers\StockController::class);
 
 

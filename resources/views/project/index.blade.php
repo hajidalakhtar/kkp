@@ -102,13 +102,13 @@
                                         <td>
 
                                             <div class="text-center">
-                                                <a href="{{ asset('storage/' . $project->document_spk_owner) }}"
+                                                <a href="{{ asset('documents/' . $project->document_spk_owner) }}"
                                                    data-fancybox="gallery" class="btn btn-primary btn-sm m-1">Download
                                                     SPK Owner</a> <br/>
-                                                <a href="{{ asset('storage/' . $project->document_invoice_tagihan) }}"
+                                                <a href="{{ asset('documents/' . $project->document_invoice_tagihan) }}"
                                                    data-fancybox="gallery" class="btn btn-primary btn-sm m-1">Download
                                                     Invoice Tagihan</a><br/>
-                                                <a href="{{ asset('storage/' . $project->document_laporan_progress) }}"
+                                                <a href="{{ asset('documents/' . $project->document_laporan_progress) }}"
                                                    data-fancybox="gallery" class="btn btn-primary btn-sm m-1">Download
                                                     Laporan Progress</a>
                                             </div>

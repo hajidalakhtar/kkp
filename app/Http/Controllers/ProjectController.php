@@ -48,15 +48,22 @@ class ProjectController extends Controller
         $project->tanggal_selesai = $request->tanggal_selesai;
 
         if ($request->hasFile('document_spk_owner')) {
-            $project->document_spk_owner = $request->file('document_spk_owner')->store('documents');
+            $file = $request->file('document_spk_owner');
+            $file->move('documents', $file->getClientOriginalName());
+            $project->document_spk_owner = $file->getClientOriginalName();
+
         }
 
         if ($request->hasFile('document_invoice_tagihan')) {
-            $project->document_invoice_tagihan = $request->file('document_invoice_tagihan')->store('documents');
+            $file = $request->file('document_invoice_tagihan');
+            $file->move('documents', $file->getClientOriginalName());
+            $project->document_invoice_tagihan = $file->getClientOriginalName();
         }
 
         if ($request->hasFile('document_laporan_progress')) {
-            $project->document_laporan_progress = $request->file('document_laporan_progress')->store('documents');
+            $file = $request->file('document_laporan_progress');
+            $file->move('documents', $file->getClientOriginalName());
+            $project->document_laporan_progress = $file->getClientOriginalName();
         }
 
         $project->save();

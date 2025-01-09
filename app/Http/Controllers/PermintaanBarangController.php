@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PermintaanBarang;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class PermintaanBarangController extends Controller
@@ -11,7 +13,16 @@ class PermintaanBarangController extends Controller
      */
     public function index()
     {
-        return view('permintaan-barang.index');
+
+        $permintaanBarnag = PermintaanBarang::all();
+        return view('permintaan-barang.index', compact("permintaanBarnag"));
+    }
+
+    public function requestBarang()
+    {
+
+        $produk = Produk::all();
+        return view('permintaan-barang.request', compact("produk"));
     }
 
     /**
@@ -19,7 +30,8 @@ class PermintaanBarangController extends Controller
      */
     public function create()
     {
-        //
+
+
     }
 
     /**
@@ -27,9 +39,21 @@ class PermintaanBarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nama_peminta' => 'required|string|max:255',
+            'id_barang' => 'required|exists:produks,id',
+            'jumlah' => 'required|integer|min:1',
+        ]);
 
+        \App\Models\PermintaanBarang::create([
+            'nama_peminta' => $request->input('nama_peminta'),
+            'id_barang' => $request->input('id_barang'),
+            'jumlah' => $request->input('jumlah'),
+            'status' => 'pending',
+        ]);
+
+        return redirect()->back()->with('success', 'Permintaan barang berhasil diajukan');
+    }
     /**
      * Display the specified resource.
      */
@@ -60,5 +84,26 @@ class PermintaanBarangController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function approve(string $id)
+    {
+        $permintaan = PermintaanBarang::findOrFail($id);
+        $permintaan->status = 'approved';
+        $permintaan->save();
+
+
+        $stock = Produk::find($permintaan->id_barang);
+        $stock->stock += $permintaan->jumlah;
+
+        return redirect()->back()->with('success', 'Permintaan barang berhasil disetujui');
+    }
+
+    public function reject(string $id)
+    {
+        $permintaan = PermintaanBarang::findOrFail($id);
+        $permintaan->status = 'rejected';
+        $permintaan->save();
+        return redirect()->back()->with('success', 'Permintaan barang berhasil ditolak');
     }
 }

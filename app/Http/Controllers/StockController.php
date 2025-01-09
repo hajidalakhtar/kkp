@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -11,7 +12,9 @@ class StockController extends Controller
      */
     public function index()
     {
-        return view('stock.index');
+
+        $product = Produk::all();
+        return view('stock.index', compact('product'));
     }
 
     /**
@@ -19,7 +22,6 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -27,7 +29,17 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required|numeric',
+        ]);
+
+        try {
+            Produk::create($request->all());
+            return redirect()->route('stock.index')->with('success', 'Data berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            return redirect()->route('stock.index')->with('error', 'Data gagal ditambahkan');
+        };
     }
 
     /**
@@ -51,14 +63,25 @@ class StockController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required|numeric',
+        ]);
 
+        try {
+            $produk = Produk::findOrFail($id);
+            $produk->update($request->all());
+            return redirect()->route('stock.index')->with('success', 'Data berhasil diperbarui');
+        } catch (\Throwable $th) {
+            return redirect()->route('stock.index')->with('error', 'Data gagal diperbarui');
+    }
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Produk::destroy($id);
+        return redirect()->route('stock.index')->with('success', 'Data berhasil dihapus');
     }
 }
