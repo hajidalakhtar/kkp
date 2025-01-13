@@ -50,6 +50,11 @@ class PettyCashController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
+
+        $product = Produk::find($request->id_barang);
+        $product->stok -= $request->jumlah;
+        $product->save();
+
         return redirect()->route('petty-cash.index')->with('success', 'Petty cash created successfully.');
     }
 
