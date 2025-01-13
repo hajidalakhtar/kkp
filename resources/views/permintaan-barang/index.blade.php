@@ -44,7 +44,12 @@
 
 @section('content')
     <x-page-header title="Permintaan Barang">
-        <a href="/request-barang" class="btn btn-primary d-none d-sm-inline-block" >
+        <a href="{{route("laporan.pembelian-barang.export")}}?start_at={{\Carbon\Carbon::now()->format("d-m-Y")}}&end_at={{\Carbon\Carbon::now()->addMonth(1)->format("d-m-Y")}}"
+           class="btn btn-success d-none d-sm-inline-block">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            Export
+        </a>
+        <a href="/request-barang" class="btn btn-primary d-none d-sm-inline-block">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

@@ -44,6 +44,11 @@
 
 @section('content')
     <x-page-header title="Stock">
+        <a href="{{route("laporan.stock-barang.export")}}?start_at={{\Carbon\Carbon::now()->format("d-m-Y")}}&end_at={{\Carbon\Carbon::now()->addMonth(1)->format("d-m-Y")}}"
+           class="btn btn-success d-none d-sm-inline-block">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            Export
+        </a>
         <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
            data-bs-target="#modal-create">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -56,6 +61,7 @@
             </svg>
             Tambah Stock
         </a>
+
         <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
            data-bs-target="#modal-create" aria-label="Create new report">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->

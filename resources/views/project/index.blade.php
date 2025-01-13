@@ -44,6 +44,11 @@
 
 @section('content')
     <x-page-header title="Proyek">
+        <a href="{{route("laporan.project.export")}}?start_at={{\Carbon\Carbon::now()->format("d-m-Y")}}&end_at={{\Carbon\Carbon::now()->addMonth(1)->format("d-m-Y")}}"
+           class="btn btn-success d-none d-sm-inline-block">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            Export
+        </a>
         <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
            data-bs-target="#modal-create">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
