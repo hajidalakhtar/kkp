@@ -20,6 +20,8 @@ Route::post("approve/{id}", [App\Http\Controllers\PermintaanBarangController::cl
 Route::post("reject/{id}", [App\Http\Controllers\PermintaanBarangController::class, "reject"])->name("permintaan-barang.reject");
 
 Route::resource("stock", App\Http\Controllers\StockController::class);
+Route::resource("petty-cash", App\Http\Controllers\PettyCashController::class);
+
 
 
 Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function () {
