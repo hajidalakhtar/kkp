@@ -219,21 +219,24 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Nama</label>
-                                    <input type="text" class="form-control" name="name">
+                        <div id="dynamic-fields">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Nama</label>
+                                        <input type="text" class="form-control" name="name[]">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Stock</label>
-                                    <input type="number" class="form-control" name="stock">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Stock</label>
+                                        <input type="number" class="form-control" name="stock[]">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <button type="button" class="btn btn-secondary" id="add-row">Tambah</button>
+                        </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                             Cancel
@@ -316,6 +319,32 @@
         {{--    --}}{{--href="{{route("attendance.export", $event->id)}}"--}}
         {{--}--}}
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#add-row').click(function () {
+                let newRow = `
+               <div>
+                <hr class="mt-3 mb-3"/>
 
+ <div class="row">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label">Nama</label>
+                            <input type="text" class="form-control" name="name[]">
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label">Stock</label>
+                            <input type="number" class="form-control" name="stock[]">
+                        </div>
+                    </div>
+                </div>
+</div>
+            `;
+                $('#dynamic-fields').append(newRow);
+            });
+        });
+    </script>
 @endpush
 

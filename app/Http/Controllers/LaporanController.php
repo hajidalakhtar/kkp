@@ -24,7 +24,8 @@ class LaporanController extends Controller
         // Data untuk CSV
         $startAt = Carbon::parse(request('start_at'))->format('Y-m-d H:i:s');
         $endAt = Carbon::parse(request('end_at'))->format('Y-m-d H:i:s');
-        $data = PermintaanBarang::whereBetween('created_at', [$startAt, $endAt])->get();
+//        $data = PermintaanBarang::whereBetween('created_at', [$startAt, $endAt])->get();
+        $data = PermintaanBarang::all();
         // Headers CSV
         $headers = [
             'Content-Type' => 'text/csv',

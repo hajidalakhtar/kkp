@@ -30,16 +30,21 @@ class StockController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'stock' => 'required|numeric',
+            'name.*' => 'required|string|max:255',
+            'stock.*' => 'required|numeric',
         ]);
 
         try {
-            Produk::create($request->all());
+            foreach ($request->name as $key => $value) {
+                Produk::create([
+                    'name' => $request->name[$key],
+                    'stock' => $request->stock[$key],
+                ]);
+            }
             return redirect()->route('stock.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->route('stock.index')->with('error', 'Data gagal ditambahkan');
-        };
+        }
     }
 
     /**

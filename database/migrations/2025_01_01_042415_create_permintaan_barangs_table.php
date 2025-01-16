@@ -17,6 +17,9 @@ return new class extends Migration {
             $table->integer('jumlah');
             $table->string('status')->default('pending');
             $table->text('deskripsi');
+            $table->string('no_form');
+            $table->date('tanggal');
+            $table->integer('harga');
             $table->timestamps();
         });
     }

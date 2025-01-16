@@ -110,7 +110,7 @@
                                     <th>Jumlah</th>
                                     <th>Harga</th>
                                     <th>Deskripsi</th>
-                                    {{-- <th>Action</th> --}}
+                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -122,6 +122,14 @@
                                         <td>{{ $pc->jumlah }}</td>
                                         <td>{{ $pc->harga }}</td>
                                         <td>{{ $pc->deskripsi }}</td>
+                                        <td>
+{{--                                            <a href="{{ route('petty-cash.edit', $pc->id) }}" class="btn btn-primary">Edit</a>--}}
+                                            <form action="{{ route('petty-cash.destroy', $pc->id) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -143,42 +151,47 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">ID Barang</label>
-                                    <select class="form-control" name="id_barang">
-                                        @foreach($product as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    {{--                                    <input type="text" class="form-control" name="id_barang" required>--}}
+
+                        <div class="modal-body">
+                            <div id="dynamic-fields">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">ID Barang</label>
+                                            <select class="form-control" name="id_barang[]">
+                                                @foreach($product as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tanggal</label>
+                                            <input type="date" class="form-control" name="tanggal[]" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Jumlah</label>
+                                            <input type="number" class="form-control" name="jumlah[]" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Harga</label>
+                                            <input type="number" class="form-control" name="harga[]" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Deskripsi</label>
+                                            <textarea class="form-control" name="deskripsi[]" required></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Tanggal</label>
-                                    <input type="date" class="form-control" name="tanggal" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Jumlah</label>
-                                    <input type="number" class="form-control" name="jumlah" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Harga</label>
-                                    <input type="number" class="form-control" name="harga" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label class="form-label">Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" required></textarea>
-                                </div>
-                            </div>
+                            <button type="button" class="btn btn-secondary" id="add-row">Tambah</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -260,6 +273,55 @@
         {{--    location.href = "{{route("attendance.export", $event->id)}}?fraksi=" + selectFraksi + "&instansi=" + selectInstansi + "&status_kehadiran=" + selectStatusKehadiran;--}}
         {{--    --}}{{--href="{{route("attendance.export", $event->id)}}"--}}
         {{--}--}}
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#add-row').click(function () {
+                let newRow = `
+                <div>
+                <hr class="mt-3 mb-3"/>
+                <div class="row ">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label">ID Barang</label>
+                            <select class="form-control" name="id_barang[]">
+                                @foreach($product as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+                                @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="mb-3">
+                <label class="form-label">Tanggal</label>
+                <input type="date" class="form-control" name="tanggal[]" required>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="mb-3">
+                <label class="form-label">Jumlah</label>
+                <input type="number" class="form-control" name="jumlah[]" required>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="mb-3">
+                <label class="form-label">Harga</label>
+                <input type="number" class="form-control" name="harga[]" required>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="mb-3">
+                <label class="form-label">Deskripsi</label>
+                <textarea class="form-control" name="deskripsi[]" required></textarea>
+            </div>
+        </div>
+    </div>
+    </div>
+`;
+                $('#dynamic-fields').append(newRow);
+            });
+        });
     </script>
 
 @endpush

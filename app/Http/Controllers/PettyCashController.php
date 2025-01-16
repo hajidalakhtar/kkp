@@ -35,24 +35,29 @@ class PettyCashController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_barang' => 'required|exists:produks,id',
-            'tanggal' => 'required|date',
-            'jumlah' => 'required|integer',
-            'harga' => 'required|integer',
-            'deskripsi' => 'required|string|max:255',
+            'id_barang.*' => 'required|exists:produks,id',
+            'tanggal.*' => 'required|date',
+            'jumlah.*' => 'required|integer',
+            'harga.*' => 'required|integer',
+            'deskripsi.*' => 'required|string|max:255',
         ]);
 
-        PettyCash::create([
-            'id_barang' => $request->id_barang,
-            'tanggal' => $request->tanggal,
-            'jumlah' => $request->jumlah,
-            'harga' => $request->harga,
-            'deskripsi' => $request->deskripsi,
-        ]);
+        foreach ($request->id_barang as $key => $value) {
+            PettyCash::create([
+                'id_barang' => $request->id_barang[$key],
+                'tanggal' => $request->tanggal[$key],
+                'jumlah' => $request->jumlah[$key],
+                'harga' => $request->harga[$key],
+                'deskripsi' => $request->deskripsi[$key],
+            ]);
+
+            $product = Produk::find($request->id_barang[$key]);
+            $product->stock -= $request->jumlah[$key];
+            $product->save();
+        }
 
 
-        $product = Produk::find($request->id_barang);
-        $product->stok -= $request->jumlah;
+
         $product->save();
 
         return redirect()->route('petty-cash.index')->with('success', 'Petty cash created successfully.');
@@ -87,6 +92,8 @@ class PettyCashController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pettyCash = PettyCash::find($id);
+        $pettyCash->delete();
+        return redirect()->back();
     }
 }

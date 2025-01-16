@@ -45,22 +45,30 @@ class PermintaanBarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_peminta' => 'required|string|max:255',
-            'id_barang' => 'required|exists:produks,id',
-            'jumlah' => 'required|integer|min:1',
-            'deskripsi' => 'required',
-
+            'nama_peminta.*' => 'required|string|max:255',
+            'id_barang.*' => 'required|exists:produks,id',
+            'jumlah.*' => 'required|integer|min:1',
+            'deskripsi.*' => 'required',
+            'no_form.*' => 'required',
+            'tanggal.*' => 'required',
+            'harga.*' => 'required',
         ]);
 
+        foreach ($request->id_barang as $key => $value) {
+            \App\Models\PermintaanBarang::create([
+                'nama_karyawan' => $request->nama_peminta[$key],
+                'id_barang' => $request->id_barang[$key],
+                'jumlah' => $request->jumlah[$key],
+                'deskripsi' => $request->deskripsi[$key],
+                'status' => 'pending',
+                'no_form' => $request->no_form[$key],
+                'tanggal' => $request->tanggal[$key],
+                'harga' => $request->harga[$key],
+            ]);
+        }
 
-        \App\Models\PermintaanBarang::create([
-            'nama_karyawan' => $request->input('nama_peminta'),
-            'id_barang' => $request->input('id_barang'),
-            'jumlah' => $request->input('jumlah'),
-            'deskripsi' => $request->input('deskripsi'),
-            'status' => 'pending',
-        ]);
         return redirect()->back()->with('success', 'Permintaan barang berhasil diajukan');
+
     }
     /**
      * Display the specified resource.
