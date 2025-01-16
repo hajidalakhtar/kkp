@@ -89,15 +89,6 @@
                             {{--                                </select>--}}
                             {{--                            </div>--}}
 
-                            <div class="w-100 ">
-                                <div class="form-label">Status</div>
-                                <select id="selectStatusKehadiran" class="form-select">
-                                    <option value="">All</option>
-                                    <option value="hadir">Selesai</option>
-                                    <option value="tidak_hadir">Prosess</option>
-                                </select>
-                            </div>
-
 
                         </div>
                         <div class="table-responsive p-2">
