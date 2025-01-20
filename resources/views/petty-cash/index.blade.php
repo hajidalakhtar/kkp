@@ -95,7 +95,7 @@
                             <table id="example" class="display" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+{{--                                    <th>ID</th>--}}
                                     <th>Nama Barang</th>
                                     <th>Tanggal Pemesanan</th>
                                     <th>Jumlah</th>
@@ -107,7 +107,7 @@
                                 <tbody>
                                 @foreach($pettyCash as $pc)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+{{--                                        <td>{{ $loop->iteration }}</td>--}}
                                         <td>{{ $pc->nama_barang }}</td>
                                         <td>{{ $pc->tanggal }}</td>
                                         <td>{{ $pc->jumlah }}</td>
