@@ -103,9 +103,10 @@
                                     <tr>
                                         <td>{{ $project->id }}</td>
                                         <td>{{ $project->nama }}</td>
+                                        <td>{{ $project->tanggal_selesai }}</td>
+                                        <td>{{ $project->tanggal_selesai }}</td>
                                         <td>{{ $project->deskripsi }}</td>
-                                        <td>{{ $project->tanggal_selesai }}</td>
-                                        <td>{{ $project->tanggal_selesai }}</td>
+
                                         <td>
 
                                             <div class="text-center">
