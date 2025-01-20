@@ -35,30 +35,23 @@ class PettyCashController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_barang.*' => 'required|exists:produks,id',
+            'nama_barang.*' => 'required',
             'tanggal.*' => 'required|date',
             'jumlah.*' => 'required|integer',
             'harga.*' => 'required|integer',
             'deskripsi.*' => 'required|string|max:255',
         ]);
 
-        foreach ($request->id_barang as $key => $value) {
+        foreach ($request->nama_barang as $key => $value) {
             PettyCash::create([
-                'id_barang' => $request->id_barang[$key],
+                'nama_barang' => $request->nama_barang[$key],
                 'tanggal' => $request->tanggal[$key],
                 'jumlah' => $request->jumlah[$key],
                 'harga' => $request->harga[$key],
                 'deskripsi' => $request->deskripsi[$key],
             ]);
-
-            $product = Produk::find($request->id_barang[$key]);
-            $product->stock -= $request->jumlah[$key];
-            $product->save();
         }
 
-
-
-        $product->save();
 
         return redirect()->route('petty-cash.index')->with('success', 'Petty cash created successfully.');
     }
@@ -76,7 +69,7 @@ class PettyCashController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
@@ -84,7 +77,24 @@ class PettyCashController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama_barang' => 'required',
+            'tanggal' => 'required|date',
+            'jumlah' => 'required|integer',
+            'harga' => 'required|integer',
+            'deskripsi' => 'required|string|max:255',
+        ]);
+
+        $pettyCash = PettyCash::find($id);
+        $pettyCash->update([
+            'nama_barang' => $request->nama_barang,
+            'tanggal' => $request->tanggal,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->route('petty-cash.index')->with('success', 'Petty cash updated successfully.');
     }
 
     /**

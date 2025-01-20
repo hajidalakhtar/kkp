@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KaryawanController extends Controller
@@ -13,7 +14,7 @@ class KaryawanController extends Controller
     public function index()
     {
 
-        $karyawan = Karyawan::all();
+        $karyawan = User::all();
         return view('karyawan.index', compact('karyawan'));
     }
 
@@ -30,17 +31,27 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'email' => 'required',
-            'telepon' => 'required',
-            'jabatan' => 'required',
-            'divisi' => 'required',
-            'alamat' => 'required',
-        ]);
+//        $request->validate([
+//            'name' => 'required',
+//            'email' => 'required',
+//            'password' => 'required',
+//            'telepon' => 'required',
+//            'jabatan' => 'required',
+//            'divisi' => 'required',
+//            'alamat' => 'required',
+//        ]);
 
         try {
-            Karyawan::create($request->all());
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'telepon' => $request->telepon,
+                'jabatan' => $request->jabatan,
+                'divisi' => $request->divisi,
+                'alamat' => $request->alamat,
+                'role' => "ADMIN_PROJECT", // Assuming role is also part of the request
+            ]);
             return redirect()->route('karyawan.index')->with('success', 'Data berhasil ditambahkan');
         } catch (\Throwable $th) {
             return redirect()->route('karyawan.index')->with('error', 'Data gagal ditambahkan');
@@ -69,17 +80,17 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nama' => 'required',
-            'email' => 'required',
-            'telepon' => 'required',
-            'jabatan' => 'required',
-            'divisi' => 'required',
-            'alamat' => 'required',
-        ]);
 
         try {
-            Karyawan::find($id)->update($request->all());
+            User::find($id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'telepon' => $request->telepon,
+                'jabatan' => $request->jabatan,
+                'divisi' => $request->divisi,
+                'alamat' => $request->alamat,
+            ]);
             return redirect()->route('karyawan.index')->with('success', 'Data berhasil diubah');
         } catch (\Throwable $th) {
             return redirect()->route('karyawan.index')->with('error', 'Data gagal diubah');
@@ -92,7 +103,7 @@ class KaryawanController extends Controller
     public function destroy(string $id)
     {
         try {
-            Karyawan::destroy($id);
+            User::destroy($id);
             return redirect()->route('karyawan.index')->with('success', 'Data berhasil dihapus');
         } catch (\Throwable $th) {
             return redirect()->route('karyawan.index')->with('error', 'Data gagal dihapus');

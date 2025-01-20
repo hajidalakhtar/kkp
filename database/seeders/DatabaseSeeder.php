@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Karyawan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,63 +15,65 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::factory()->create([
+        User::create([
             'name' => 'Site Manager',
             'email' => 'sitemanager@kkp.com',
             'password' => bcrypt('12345678'),
+            'jabatan' => 'Manager',
+            'divisi' => 'Site Management',
+            'alamat' => '123 Site St, City, Country',
+            'telepon' => '1234567890',
             'role' => 'SITE_MANAGER',
         ]);
 
-        User::factory()->create([
+        User::create([
             'name' => 'Admin Project',
             'email' => 'adminproject@kkp.com',
             'password' => bcrypt('12345678'),
+            'jabatan' => 'Admin',
+            'divisi' => 'Project Management',
+            'alamat' => '456 Project Rd, City, Country',
+            'telepon' => '0987654321',
             'role' => 'ADMIN_PROJECT',
         ]);
 
-        User::factory()->create([
+        User::create([
             'name' => 'Super Admin',
             'email' => 'superadmin@kkp.com',
             'password' => bcrypt('12345678'),
+            'jabatan' => 'Administrator',
+            'divisi' => 'Administration',
+            'alamat' => '789 Admin Ave, City, Country',
+            'telepon' => '1122334455',
             'role' => 'SUPER_ADMIN',
         ]);
 
-        User::factory()->create([
+        User::create([
             'name' => 'Manager Project',
             'email' => 'managerproject@kkp.com',
             'password' => bcrypt('12345678'),
+            'jabatan' => 'Manager',
+            'divisi' => 'Project Management',
+            'alamat' => '321 Manager Blvd, City, Country',
+            'telepon' => '6677889900',
             'role' => 'MANAGER_PROJECT',
         ]);
 
-        User::factory()->create([
+        User::create([
             'name' => 'Logistik',
             'email' => 'logistik@kkp.com',
             'password' => bcrypt('12345678'),
+            'jabatan' => 'Logistics',
+            'divisi' => 'Logistics',
+            'alamat' => '654 Logistics Ln, City, Country',
+            'telepon' => '4455667788',
             'role' => 'LOGISTIK',
         ]);
 
 
 
 
-        Karyawan::create([
-            'nama' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'telepon' => '1234567890',
-            'jabatan' => 'Manager',
-            'divisi' => 'Marketing',
-            'alamat' => '123 Main St, Anytown, USA',
-        ]);
-
-        Karyawan::create([
-            'nama' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'telepon' => '0987654321',
-            'jabatan' => 'Supervisor',
-            'divisi' => 'Sales',
-            'alamat' => '456 Elm St, Othertown, USA',
-        ]);
 
         DB::table('projects')->insert([
             [

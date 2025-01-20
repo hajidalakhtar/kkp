@@ -101,27 +101,114 @@
                                     <th>Jumlah</th>
                                     <th>Harga</th>
                                     <th>Deskripsi</th>
-                                     <th>Action</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($pettyCash as $pc)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $pc->produk->name }}</td>
+                                        <td>{{ $pc->nama_barang }}</td>
                                         <td>{{ $pc->tanggal }}</td>
                                         <td>{{ $pc->jumlah }}</td>
                                         <td>{{ $pc->harga }}</td>
                                         <td>{{ $pc->deskripsi }}</td>
                                         <td>
-{{--                                            <a href="{{ route('petty-cash.edit', $pc->id) }}" class="btn btn-primary">Edit</a>--}}
+                                            {{--                                            <a href="{{ route('petty-cash.edit', $pc->id) }}" class="btn btn-primary">Edit</a>--}}
                                             <form action="{{ route('petty-cash.destroy', $pc->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Hapus</button>
+                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $pc->id }}">Edit</a>
+
                                             </form>
                                         </td>
                                     </tr>
+                                    <div class="modal modal-blur fade" id="modal-edit-{{ $pc->id }}" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <form action="{{ route('petty-cash.update', $pc->id) }}" method="post"
+                                                      id="formData">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Edit Petty Cash</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div id="dynamic-fields">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Nama Barang</label>
+                                                                        <input name="nama_barang" class="form-control"
+                                                                               value="{{ $pc->nama_barang }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Tanggal</label>
+                                                                        <input type="date" class="form-control"
+                                                                               name="tanggal"
+                                                                               value="{{ $pc->tanggal }}" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Jumlah</label>
+                                                                        <input type="number" class="form-control"
+                                                                               name="jumlah" value="{{ $pc->jumlah }}"
+                                                                               required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Harga</label>
+                                                                        <input type="number" class="form-control"
+                                                                               name="harga" value="{{ $pc->harga }}"
+                                                                               required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Deskripsi</label>
+                                                                        <textarea class="form-control"
+                                                                                  name="deskripsi"
+                                                                                  required>{{ $pc->deskripsi }}</textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-secondary" id="add-row">
+                                                            Tambah
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="#" class="btn btn-link link-secondary"
+                                                           data-bs-dismiss="modal">
+                                                            Cancel
+                                                        </a>
+                                                        <button type="submit" class="btn btn-primary ms-auto">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                 width="24" height="24"
+                                                                 viewBox="0 0 24 24"
+                                                                 stroke-width="2" stroke="currentColor" fill="none"
+                                                                 stroke-linecap="round"
+                                                                 stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                <path d="M12 5l0 14"/>
+                                                                <path d="M5 12l14 0"/>
+                                                            </svg>
+                                                            Update
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -148,12 +235,8 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">ID Barang</label>
-                                            <select class="form-control" name="id_barang[]">
-                                                @foreach($product as $item)
-                                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                                @endforeach
-                                            </select>
+                                            <label class="form-label">Nama Barang</label>
+                                            <input name="nama_barang[]" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -275,12 +358,9 @@
                 <div class="row ">
                     <div class="col-lg-12">
                         <div class="mb-3">
-                            <label class="form-label">ID Barang</label>
-                            <select class="form-control" name="id_barang[]">
-                                @foreach($product as $item)
-                <option value="{{$item->id}}">{{$item->name}}</option>
-                                @endforeach
-                </select>
+                            <label class="form-label">Nama Barang</label>
+                                                                       <input name="nama_barang[]" class="form-control">
+
             </div>
         </div>
         <div class="col-lg-12">

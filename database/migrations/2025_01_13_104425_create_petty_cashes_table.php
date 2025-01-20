@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('petty_cashes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_barang")->constrained("produks");
+            $table->string("nama_barang");
             $table->date("tanggal");
             $table->integer("jumlah");
             $table->integer("harga");
