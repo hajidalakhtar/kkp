@@ -93,6 +93,7 @@
                                     <th>Nama</th>
                                     <th>Tgl Mulai</th>
                                     <th>Tgl Selesai</th>
+                                    <th>Deskripsi</th>
                                     <th>Document</th>
                                     <th>Action</th>
                                 </tr>
@@ -102,7 +103,8 @@
                                     <tr>
                                         <td>{{ $project->id }}</td>
                                         <td>{{ $project->nama }}</td>
-                                        <td>{{ $project->tanggal_mulai }}</td>
+                                        <td>{{ $project->deskripsi }}</td>
+                                        <td>{{ $project->tanggal_selesai }}</td>
                                         <td>{{ $project->tanggal_selesai }}</td>
                                         <td>
 
