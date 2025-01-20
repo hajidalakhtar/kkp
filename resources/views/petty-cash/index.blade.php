@@ -139,7 +139,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <div id="dynamic-fields">
+                                                        <div >
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="mb-3">
@@ -182,9 +182,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <button type="button" class="btn btn-secondary" id="add-row">
-                                                            Tambah
-                                                        </button>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <a href="#" class="btn btn-link link-secondary"
