@@ -110,7 +110,7 @@
                                     <th>Telepon</th>
                                     <th>Alamat</th>
                                     <th>Jabatan</th>
-                                    <th>Divisi</th>
+{{--                                    <th>Divisi</th>--}}
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -119,12 +119,12 @@
                                 @foreach($karyawan as $item)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$item->nama}}</td>
+                                        <td>{{$item->name}}</td>
                                         <td>{{$item->email}}</td>
                                         <td>{{$item->telepon}}</td>
                                         <td>{{$item->alamat}}</td>
                                         <td>{{$item->jabatan}}</td>
-                                        <td>{{$item->divisi}}</td>
+{{--                                        <td>{{$item->divisi}}</td>--}}
                                         <td>
                                             <button
                                                 class="btn btn-primary" data-bs-toggle="modal"
@@ -182,13 +182,13 @@
                                                                            name="jabatan" value="{{$item->jabatan}}">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label class="form-label">Divisi</label>
-                                                                    <input type="text" class="form-control"
-                                                                           name="divisi" value="{{$item->divisi}}">
-                                                                </div>
-                                                            </div>
+{{--                                                            <div class="col-lg-6">--}}
+{{--                                                                <div class="mb-3">--}}
+{{--                                                                    <label class="form-label">Divisi</label>--}}
+{{--                                                                    <input type="text" class="form-control"--}}
+{{--                                                                           name="divisi" value="{{$item->divisi}}">--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
                                                             <div class="col-lg-6">
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Password</label>
@@ -279,12 +279,12 @@
                                     <input type="text" class="form-control" name="jabatan">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Divisi</label>
-                                    <input type="text" class="form-control" name="divisi">
-                                </div>
-                            </div>
+{{--                            <div class="col-lg-6">--}}
+{{--                                <div class="mb-3">--}}
+{{--                                    <label class="form-label">Divisi</label>--}}
+{{--                                    <input type="text" class="form-control" name="divisi">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label">Password</label>

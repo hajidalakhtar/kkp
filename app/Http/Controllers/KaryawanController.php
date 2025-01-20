@@ -48,7 +48,7 @@ class KaryawanController extends Controller
                 'password' => bcrypt($request->password),
                 'telepon' => $request->telepon,
                 'jabatan' => $request->jabatan,
-                'divisi' => $request->divisi,
+                'divisi' => "-",
                 'alamat' => $request->alamat,
                 'role' => "ADMIN_PROJECT", // Assuming role is also part of the request
             ]);
@@ -88,7 +88,7 @@ class KaryawanController extends Controller
                 'password' => bcrypt($request->password),
                 'telepon' => $request->telepon,
                 'jabatan' => $request->jabatan,
-                'divisi' => $request->divisi,
+                'divisi' => "-",
                 'alamat' => $request->alamat,
             ]);
             return redirect()->route('karyawan.index')->with('success', 'Data berhasil diubah');

@@ -114,7 +114,7 @@
                                         <td>{{ $pc->harga }}</td>
                                         <td>{{ $pc->deskripsi }}</td>
                                         <td>
-                                            {{--                                            <a href="{{ route('petty-cash.edit', $pc->id) }}" class="btn btn-primary">Edit</a>--}}
+                                            {{--<a href="{{ route('petty-cash.edit', $pc->id) }}" class="btn btn-primary">Edit</a>--}}
                                             <form action="{{ route('petty-cash.destroy', $pc->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
