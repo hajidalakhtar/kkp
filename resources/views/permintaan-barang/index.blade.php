@@ -107,6 +107,9 @@
                                     <th>Quantity</th>
                                     <th>Tanggal Pemesanan</th>
                                     <th>Status</th>
+                                    <th>No Form</th>
+                                    <th>Tanggal</th>
+                                    <th>Harga</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -114,26 +117,16 @@
                                 @foreach($permintaanBarnag as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->nama_peminta }}</td>
+                                        <td>{{ $item->nama_karyawan }}</td>
                                         <td>{{ $item->product->name }}</td>
                                         <td>{{ $item->jumlah }}</td>
                                         <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                         <td>{{ $item->status }}</td>
+                                        <td>{{ $item->no_form }}</td>
+                                        <td>{{ $item->tanggal }}</td>
+                                        <td>{{ $item->harga }}</td>
                                         <td>
-                                            {{--                                            <a href="{{ route('permintaan-barang.edit', $item->id) }}"--}}
-                                            {{--                                               class="btn btn-sm btn-primary">Edit</a>--}}
-                                            {{--                                            --}}
-                                            {{--                                            <form action="{{ route('permintaan-barang.destroy', $item->id) }}"--}}
-                                            {{--                                                  method="POST" style="display:inline-block;">--}}
-                                            {{--                                                @csrf--}}
-                                            {{--                                                @method('DELETE')--}}
-                                            {{--                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>--}}
-                                            {{--                                            </form>--}}
-
-
-
                                             @if($item->status != "pending")
-
                                             @else
                                                 <form action="{{ route('permintaan-barang.approve', $item->id) }}"
                                                       method="POST" style="display:inline-block;">
