@@ -46,7 +46,7 @@
     @foreach($data as $item)
         <tr>
             <td>{{ $item->nama_karyawan }}</td>
-            <td>{{ $item->id_barang }}</td>
+            <td>{{ $item->product->name }}</td>
             <td>{{ $item->jumlah }}</td>
             <td>{{ $item->status }}</td>
             <td>{{ $item->deskripsi }}</td>
