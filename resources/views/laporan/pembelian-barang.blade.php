@@ -21,6 +21,8 @@
     </style>
 </head>
 <body>
+<img src="kop.png" style="width: 100%;margin-top: 0;padding-top:0">
+
 <h1>Pembelian Barang</h1>
 <table>
     <thead>
