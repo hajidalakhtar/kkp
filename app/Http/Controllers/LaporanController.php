@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PermintaanBarang;
+use App\Models\PettyCash;
 use App\Models\Produk;
 use App\Models\Project;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class LaporanController extends Controller
 {
@@ -24,6 +23,15 @@ class LaporanController extends Controller
 
         $pdf = PDF::loadView('laporan.pembelian-barang', compact('data'));
         return $pdf->download('pembelian_barang_' . date('Ymd_His') . '.pdf');
+    }
+
+    public function exportPembelianPettyCast()
+    {
+        $data = PettyCash::all();
+
+
+        $pdf = PDF::loadView('laporan.pembelian-petty-cash', compact('data'));
+        return $pdf->download('pembelian_petty_cash_' . date('Ymd_His') . '.pdf');
     }
 
     public function reportStockBarang()

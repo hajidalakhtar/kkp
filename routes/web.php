@@ -33,4 +33,5 @@ Route::group(['prefix' => 'laporan', 'as' => 'laporan.'], function () {
     Route::get("pembelian-barang/export", [App\Http\Controllers\LaporanController::class, "exportPembelianBarangCSV"])->name("pembelian-barang.export");
     Route::get("stock-barang/export", [App\Http\Controllers\LaporanController::class, "exportStockBarangCSV"])->name("stock-barang.export");
     Route::get("project/export", [App\Http\Controllers\LaporanController::class, "exportProjectCSV"])->name("project.export");
+    Route::get("pembelian-petty-cash/export", [App\Http\Controllers\LaporanController::class, "exportPembelianPettyCast"])->name("pembelian-petty-cash.export");
 });

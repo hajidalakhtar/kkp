@@ -44,6 +44,11 @@
 
 @section('content')
     <x-page-header title="Petty Cash">
+        <a href="{{route("laporan.pembelian-petty-cash.export")}}?start_at={{\Carbon\Carbon::now()->format("d-m-Y")}}&end_at={{\Carbon\Carbon::now()->addMonth(1)->format("d-m-Y")}}"
+           class="btn btn-success d-none d-sm-inline-block">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            Export
+        </a>
         <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
            data-bs-target="#modal-create">
             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -95,7 +100,7 @@
                             <table id="example" class="display" style="width:100%">
                                 <thead>
                                 <tr>
-{{--                                    <th>ID</th>--}}
+                                    {{--                                    <th>ID</th>--}}
                                     <th>Nama Barang</th>
                                     <th>Tanggal Pemesanan</th>
                                     <th>Jumlah</th>
@@ -107,7 +112,7 @@
                                 <tbody>
                                 @foreach($pettyCash as $pc)
                                     <tr>
-{{--                                        <td>{{ $loop->iteration }}</td>--}}
+                                        {{--                                        <td>{{ $loop->iteration }}</td>--}}
                                         <td>{{ $pc->nama_barang }}</td>
                                         <td>{{ $pc->tanggal }}</td>
                                         <td>{{ $pc->jumlah }}</td>
@@ -119,12 +124,14 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Hapus</button>
-                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-edit-{{ $pc->id }}">Edit</a>
+                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                                   data-bs-target="#modal-edit-{{ $pc->id }}">Edit</a>
 
                                             </form>
                                         </td>
                                     </tr>
-                                    <div class="modal modal-blur fade" id="modal-edit-{{ $pc->id }}" tabindex="-1" role="dialog"
+                                    <div class="modal modal-blur fade" id="modal-edit-{{ $pc->id }}" tabindex="-1"
+                                         role="dialog"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
@@ -139,7 +146,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <div >
+                                                        <div>
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="mb-3">

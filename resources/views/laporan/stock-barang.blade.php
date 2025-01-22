@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Barang</title>
+    <title>Laporan Stock Barang</title>
     <style>
         table {
             width: 100%;
@@ -17,13 +17,18 @@
         .footer {
             margin-top: 20px;
             text-align: right;
+            padding-right: 20px;
+        }
+
+        .footer p {
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
 <img src="kop.png" style="width: 100%;margin-top: 0;padding-top:0">
 
-<h1>Stock Barang</h1>
+<h1>Laporan Stock Barang</h1>
 <table>
     <thead>
     <tr>
@@ -43,7 +48,11 @@
     </tbody>
 </table>
 <div class="footer">
-    <p>Dicetak pada tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }} oleh Super Admin</p>
+    <p>Jakarta, {{ \Carbon\Carbon::now()->format('d F Y') }}</p>
+    <p>Mengetahui,</p>
+    <br><br><br>
+    <p><u>Marvin Limanjaya</u><br>
+        Direktur Utama</p>
 </div>
 </body>
 </html>

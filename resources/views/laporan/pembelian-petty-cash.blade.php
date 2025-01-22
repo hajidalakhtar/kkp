@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan Proyek</title>
+    <title>Laporan pertty cash</title>
     <style>
         table {
             width: 100%;
             border-collapse: collapse;
         }
+
         table, th, td {
             border: 1px solid black;
         }
+
         th, td {
             padding: 8px;
             text-align: left;
         }
+
         .footer {
             margin-top: 20px;
             text-align: right;
@@ -26,24 +29,27 @@
     </style>
 </head>
 <body>
-<img src="kop.png" style="width: 100%;margin-top: 0;padding-top:0">
-<h1>Laporan Proyek</h1>
+<img src="kop.png" style="width: 100%; margin-top: 0; padding-top: 0;">
+<h1>Laporan pertty cash</h1>
 <table>
     <thead>
     <tr>
-        <th>Nama</th>
-        <th>Deskripsi</th>
-        <th>Tanggal Mulai</th>
-        <th>Tanggal Selesai</th>
+        <td>Nama Barang</td>
+        <td>tanggal</td>
+        <td>jumlah</td>
+        <td>harga</td>
+        <td>deskripsi</td>
+
     </tr>
     </thead>
     <tbody>
     @foreach($data as $item)
         <tr>
-            <td>{{ $item->nama }}</td>
+            <td>{{ $item->nama_barang }}</td>
+            <td>{{ $item->tanggal }}</td>
+            <td>{{ $item->jumlah }}</td>
+            <td>{{ $item->harga }}</td>
             <td>{{ $item->deskripsi }}</td>
-            <td>{{ $item->tanggal_mulai }}</td>
-            <td>{{ $item->tanggal_selesai }}</td>
         </tr>
     @endforeach
     </tbody>
