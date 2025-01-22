@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan pertty cash</title>
+    <title>Laporan Petty Cash</title>
     <style>
         table {
             width: 100%;
@@ -30,7 +30,7 @@
 </head>
 <body>
 <img src="kop.png" style="width: 100%; margin-top: 0; padding-top: 0;">
-<h1>Laporan pertty cash</h1>
+<h1>Laporan Petty Cash</h1>
 <table>
     <thead>
     <tr>
