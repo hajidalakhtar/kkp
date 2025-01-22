@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pembelian Barang</title>
+    <title>Laporan Pembelian Barang</title>
     <style>
         table {
             width: 100%;
@@ -28,7 +28,7 @@
 <body>
 <img src="kop.png" style="width: 100%;margin-top: 0;padding-top:0">
 
-<h1>Pembelian Barang</h1>
+<h1>Laporan Pembelian Barang</h1>
 <table>
     <thead>
     <tr>
