@@ -23,6 +23,14 @@
         .footer p {
             margin: 5px 0;
         }
+
+        .superadmin-footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 10px;
+            background-color: white;
+        }
     </style>
 </head>
 <body>
@@ -48,11 +56,14 @@
     </tbody>
 </table>
 <div class="footer">
-    <p>Jakarta, {{ \Carbon\Carbon::now()->format('d F Y') }}</p>
+    <p>Jakarta, {{ \Carbon\Carbon::now()->locale('id')->dayName }} {{ \Carbon\Carbon::now()->format('d F Y') }}</p>
     <p>Mengetahui,</p>
     <br><br><br>
     <p><u>Marvin Limanjaya</u><br>
         Direktur Utama</p>
+</div>
+<div class="superadmin-footer">
+    <p>dicetak pada {{ \Carbon\Carbon::now()->format('d F Y') }} oleh superadmin</p>
 </div>
 </body>
 </html>
