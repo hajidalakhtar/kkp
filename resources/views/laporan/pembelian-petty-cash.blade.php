@@ -62,14 +62,14 @@
     </tbody>
 </table>
 <div class="footer">
-    <p>Jakarta, {{ \Carbon\Carbon::now()->locale('id')->dayName }} 6 Febuari 2025</p>
+    <p>Jakarta, {{ \Carbon\Carbon::now()->locale('id')->dayName }} 6 Februari 2025</p>
     <p>Mengetahui,</p>
     <br><br><br>
     <p><u>Marvin Limanjaya</u><br>
         Direktur Utama</p>
 </div>
 <div class="superadmin-footer">
-    <p>dicetak pada 6 Febuari 2025 oleh superadmin</p>
+    <p>dicetak pada 6 Februari 2025 oleh superadmin</p>
 </div>
 </body>
 </html>
